@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.test.fitnesse</groupId>
+    <artifactId>fitnesse</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <mafia-version>2.1.6</mafia-version>
+        <fitnesse.version>20150424</fitnesse.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.fitnesse</groupId>
+            <artifactId>fitnesse</artifactId>
+            <version>${fitnesse.version}</version>
+            <classifier>standalone</classifier>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>nl.sijpesteijn.testing.fitnesse.plugins</groupId>
+                    <artifactId>mafia-maven-plugin</artifactId>
+                    <version>${mafia-version}</version>
+                    <configuration>
+                        <retainDays>0</retainDays>
+                        <!--<port>9090</port>-->
+                        <jvmArguments>
+                            <jvmArgument>
+                                CM_SYSTEM=fitnesse.wiki.cmSystems.GitCmSystem
+                            </jvmArgument>
+                        </jvmArguments>
+                        <resources>
+                            <resource>./src/main/config/local/</resource>
+                        </resources>
+                        <targets>
+                            <target>${basedir}</target>
+                        </targets>
+                        <statics>
+                            <static>!define TEST_SYSTEM {slim}</static>
+                            <static>!define COLLAPSE_SETUP {true}</static>
+                            <static>!define COLLAPSE_TEARDOWN {true}</static>
+                        </statics>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>content</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>browser</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>nl.sijpesteijn.testing.fitnesse.plugins</groupId>
+                        <artifactId>mafia-maven-plugin</artifactId>
+                        <version>${mafia-version}</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>content</goal>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

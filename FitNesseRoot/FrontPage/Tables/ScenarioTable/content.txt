@@ -1,0 +1,12 @@
+|scenario   |widget         |wikiText    |renders|htmlText|
+|create page|widgetPage     |with content|@wikiText       |
+|check      |request page   |widgetPage  |200             |
+|ensure     |content matches|@htmlText                    |
+|show       |content                                      |
+
+
+
+|widget                 |wiki text                 |renders|html text|
+|wiki text              |html text                                   |
+|this is ''italic'' text|this is <i>italic</i> text|italic widget    |
+|this is '''bold''' text|this is <b>bold</b> text  |bold widget      |

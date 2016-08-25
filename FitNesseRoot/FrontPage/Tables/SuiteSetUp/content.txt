@@ -1,0 +1,9 @@
+|import                         |
+|com.test.table.dynamic_decision|
+|com.test.table.query           |
+|com.test.table.table           |
+|com.test.table.script          |
+
+
+|Define table type|
+|Bowling |as Table|

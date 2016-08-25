@@ -1,0 +1,15 @@
+!define currentMonth {!today (MMM)}
+!define currentYear {${=!today (yyyy)=}}
+!define currentDay {${=%02d:!today (dd)=}}
+
+|Query:employees hired before|10-Dec-1980                                                                      |
+|company number              |employee number|first name|last name|hire date                                   |
+|4808147                     |9942           |Bill      |Mitchell |19-Dec-1966                                 |
+|4808147                     |1429           |Bob       |Martin   |${currentDay}-${currentMonth}-${currentYear}|
+
+# you can leave cells blank and allow them to be filled in:
+
+|Query:employees hired before|10-Dec-1980                   |
+|employee number             |first name|last name|hire date|
+|1429                        |          |         |         |
+|8832                        |          |         |         |
